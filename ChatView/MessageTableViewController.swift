@@ -96,7 +96,11 @@ class MessageTableViewController: UITableViewController {
                         print("got request")
                         self.messageStatus[self.messageStatus.count - 1] = "Sent"
                         print(self.messageStatus)
-                        self.tableView.reloadData()
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            //reload your tableView
+                            self.tableView.reloadData()
+                            
+                        })
                     }
                 default:
                     print("request not successful.")
