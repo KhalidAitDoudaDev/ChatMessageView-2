@@ -98,8 +98,11 @@ class MessageTableViewController: UITableViewController {
                         print(self.messageStatus)
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             //reload your tableView
-                            self.tableView.reloadData()
-                            
+                            self.tableView.beginUpdates()
+                            let indexPath = NSIndexPath(forRow: self.messageStatus.count - 1, inSection: 0)
+                            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Middle)
+                            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Middle)
+                            self.tableView.endUpdates()
                         })
                     }
                 default:
